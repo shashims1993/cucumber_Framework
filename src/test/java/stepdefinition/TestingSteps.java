@@ -23,18 +23,21 @@ public class TestingSteps {
 		driver = new ChromeDriver();
 		String baseURL = "http://www.letskodeit.com/";
 		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);	
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);	
 		driver.get(baseURL);
 	}
 
 	@When("^User enters Username and Password$")
-	public void user_enters_Username_and_Password() {
+	public void user_enters_Username_and_Password() throws InterruptedException {
+		Thread.sleep(5000);
 		WebElement signupLink = driver.findElement(By.id("comp-iiqg1vggactionTitle"));
 		signupLink.click();		
 		WebElement loginLink = driver.findElement(By.id("signUpDialogswitchDialogLink"));
 		loginLink.click();
-		WebElement emailField = driver.findElement(By.xpath("//div[@id='memberLoginDialogemail']//input"));
-		emailField.sendKeys("test@email.com");
+		Thread.sleep(5000);
+	/*	WebElement emailField = driver.findElement(By.xpath("//div[@id='memberLoginDialogemailInput']//input"));
+		emailField.sendKeys("test@email.com");*/
+		driver.findElement(By.xpath("//div[@id='memberLoginDialogemailInput']//input")).sendKeys("test@email.com");
 		WebElement passwordField = driver.findElement(By.xpath("//div[@id='memberLoginDialogpassword']//input"));
 		passwordField.sendKeys("abcabc");
 	}
